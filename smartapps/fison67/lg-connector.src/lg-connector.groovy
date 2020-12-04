@@ -234,7 +234,7 @@ def addDevice(){
         log.debug "DTH : " + dth
         
         if(dth != ""){
-        	def childDevice = addChildDevice("fison67", dth, dni, location.hubs[0].id, [
+        	def childDevice = addChildDevice("fison67", dth, dni, location.hubs[0]?.id, [
                 "label": label
             ])    
             childDevice.setInfo(settings.address, address)
