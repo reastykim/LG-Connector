@@ -29,6 +29,7 @@
  
 import groovy.json.JsonSlurper
 import groovy.transform.Field
+include 'asynchttp_v1'
 
 @Field
 OPERATION_VALUE = [
