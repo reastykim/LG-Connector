@@ -495,7 +495,7 @@ def makeCommand(command, value){
         "value": value
     ]
     def options = _makeCommand(body)
-    sendCommand(options, null)
+    sendCommandDirectly(options)
 }
 
 def _makeCommand(body){
@@ -511,21 +511,21 @@ def _makeCommand(body){
     return options
 }
 
-def sendCommandToHub(options, _callback){ 
+def sendCommand(options, _callback){ 
 	def myhubAction = new physicalgraph.device.HubAction(options, null, [callback: _callback])
     sendHubCommand(myhubAction)
 }
 
-def sendCommand(options, _callback){
+def sendCommandDirectly(options){
     def params = [
         uri: "http://${options["headers"]["HOST"]}",
         path: options["path"],
         body: options["body"]
     ]
     asynchttp_v1.post(onCommandResponse, params, options["body"])
-	log.info ">> $options["body"]"
+    log.info "sendCommandDirectly >> $params"
 }
 
 def onCommandResponse(response, data) {
-	log.info "<< $response.data"
+	log.info "onCommandResponse >> $response.data"
 }
